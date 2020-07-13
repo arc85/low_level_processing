@@ -27,3 +27,5 @@ for (( i=0; i<${LENGTH}; i++ ));
     "
     wget ${FILE[i]}
   done
+
+cd $OVERALL_DIR
