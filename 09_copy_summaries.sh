@@ -1,17 +1,22 @@
-cd /zfs1/tbruno/arc85/0_INBOX/novaseq_run4/novaseq4_mat
+#!/bin/bash
 
-declare -a FILES=($(ls | grep -v "CITE"))
+cd $MAT_FOLDER
+
+declare -a FILES=($(ls))
 ARRAYLENGTH=${#FILES[@]}
 
 mkdir web_summaries
 
 for (( i=0; i<${ARRAYLENGTH}; i++ ));
 	do
-		cd /zfs1/tbruno/arc85/0_INBOX/novaseq_run4/novaseq4_mat/${FILES[i]}/outs
+		cd $OVERALL_DIR/${MAT_FOLDER}/${FILES[i]}/outs
 		mkdir ${FILES[i]}
-		cp web_summary.html /zfs1/tbruno/arc85/0_INBOX/novaseq_run4/novaseq4_mat/${FILES[i]}/outs/${FILES[i]}
-		cp -r ${FILES[i]} /zfs1/tbruno/arc85/0_INBOX/novaseq_run4/novaseq4_mat/web_summaries
+		cp web_summary.html ${FILES[i]}
+		cp -r ${FILES[i]} $OVERALL_DIR/${MAT_FOLDER}/web_summaries/
+		rm -r ${FILES[i]}
 		echo "
 		Copied ${FILES[i]}
 		"
 	done
+
+cd $OVERALL_DIR
