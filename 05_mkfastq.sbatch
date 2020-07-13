@@ -11,7 +11,6 @@ module load bcl2fastq2/2.20.0
 
 BCL2FASTQ=/ihome/crc/install/cellranger/bcl2fastq2-v2.20.0/bin/bcl2fastq
 
-cd $OVERALL_DIR
 SAMPLESHEET=($(ls | grep "sample_sheet.csv"))
 
 mkdir $FASTQ_FOLDER
@@ -29,7 +28,7 @@ $BCL2FASTQ --use-bases-mask=Y28,I8,Y91 \
 	--processing-threads 4 \
 	--writing-threads 1 \
 	--runfolder-dir $OVERALL_DIR/${RUN_FOLDER} \
-	--output-dir $OVERALL_DIR/${RUN_FOLDER}/${FASTQ_FOLDER} \
-	--interop-dir $OVERALL_DIR/${RUN_FOLDER}/${FASTQ_FOLDER} \
-	--sample-sheet $OVERALL_DIR/${RUN_FOLDER}/${SAMPLESHEET} \
+	--output-dir $OVERALL_DIR/${FASTQ_FOLDER} \
+	--interop-dir $OVERALL_DIR/${FASTQ_FOLDER} \
+	--sample-sheet $OVERALL_DIR/${SAMPLESHEET} \
 	--barcode-mismatches=0

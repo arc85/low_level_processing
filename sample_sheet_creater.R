@@ -1,5 +1,5 @@
 ##Generate sample sheet for bcl2fastq
-##TC March 23 2020
+##TC Jul 12 2020
 
 #Read in external arguements
 cli <- commandArgs(trailingOnly=T)
@@ -21,7 +21,7 @@ colnames(si.na.indices) <- c("index","set1","set2","set3","set4")
 
 #Read in simple sample sheet
 
-simple.sample.sheet <- paste("./ancillary_files/","novaseq_run5_simple_sample.csv",sep="")
+simple.sample.sheet <- paste("./ancillary_files/",overall.folder,"_simple_sample.csv",sep="")
 simple.sample <- read.csv(simple.sample.sheet)
 redo.lanes <- strsplit(as.character(simple.sample$Lane),split="-")
 lanes <- rep(redo.lanes[[1]][1]:redo.lanes[[1]][2],each=4)
