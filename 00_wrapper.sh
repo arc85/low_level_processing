@@ -8,4 +8,6 @@ sbatch 05_mkfastq.sbatch #change to srun in the future so the pipeline waits
 source 06_folder_conversion.sh
 source 07_define_align_array.sh
 sbatch --array=$ARRAY 08_align.sbatch
+#build 09_xxx.sh into sbatch to run when the array completes
+sbatch --array=$ARRAY_TCR_BCR 08_align_tcr_bcr.sbatch
 #build 09_xxx.sh into sbatch to run when the array completes 
