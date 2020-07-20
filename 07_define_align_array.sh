@@ -19,3 +19,5 @@ export TO_ALIGN_TCR_BCR
 export ARRAY_TCR_BCR
 
 cd $OVERALL_DIR
+
+mkdir "$MAT_FOLDER"_tcr_bcr_mat
