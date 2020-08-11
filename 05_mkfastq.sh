@@ -1,11 +1,5 @@
 #!/bin/bash
-#
-#SBATCH -N 1
-#SBATCH -t 12:00:00
-#SBATCH -J deplex
-
-#SBATCH --cpus-per-task=4
-#SBATCH --mem=40g
+srun -N 1 -t 12:00:00 -J deplex --cpus-per-task=4 --mem=40g --pty bash
 
 module load bcl2fastq2/2.20.0
 
