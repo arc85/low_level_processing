@@ -1,5 +1,4 @@
 #!/bin/bash
-srun -N 1 -t 12:00:00 -J deplex --cpus-per-task=4 --mem=40g --pty bash
 
 module load bcl2fastq2/2.20.0
 
