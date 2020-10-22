@@ -4,8 +4,8 @@ source 01_setup.sh
 source 02_run_download.sh
 source 03_untar_downloaded_run.sh
 source 04_generate_sample_sheet.sh
-sbatch 05_mkfastq.sbatch #change to srun in the future so the pipeline waits
+srun -n1 -t20:00:00 --cpus-per-task=4 --mem=40g --job-name mkfastq_tcr_bcr --output %x.out 05_mkfastq3.sh
 source 06_folder_conversion.sh
 source 07_define_align_array.sh
 sbatch --array=$ARRAY 08_align.sbatch
-#build 09_xxx.sh into sbatch to run when the array completes 
+#build 09_xxx.sh into sbatch to run when the array completes
