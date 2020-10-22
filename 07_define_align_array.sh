@@ -2,7 +2,7 @@
 
 cd $OVERALL_DIR/${FASTQ_FOLDER}/${FLOWCELL}
 
-TO_ALIGN=($(ls | grep -v "hash\|TCR\|BCR"))
+TO_ALIGN=($(ls | grep -v "CITEseq\|TCR\|BCR"))
 ALIGN_LENGTH=${#TO_ALIGN[@]}
 ALIGN_LENGTH=$(expr $ALIGN_LENGTH - 1)
 ARRAY="0-$ALIGN_LENGTH"
