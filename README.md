@@ -16,6 +16,6 @@ Currently, the pipeline will run from the wrapper through the alignment of gene 
 
 Future directions include:
 
-  1. Changing "05_mkfastq.sbatch" to use srun instead of sbatch so that the pipeline runs uninterrupted.
+  1. Include different alignment scripts for human and murine data.
   2. Changing "08_align.sbatch" to run "09_copy_summaries.sh" whenever the array completes.
   3. Run CITEseq count automatically on samples that contain cell hashing and/or CITEseq data
