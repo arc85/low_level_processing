@@ -8,4 +8,3 @@ srun -n1 -t20:00:00 --cpus-per-task=4 --mem=40g --job-name mkfastq --output %x.o
 source 06_folder_conversion.sh
 source 07_define_align_array.sh
 sbatch --array=$ARRAY 08_align.sbatch
-#build 09_xxx.sh into sbatch to run when the array completes
