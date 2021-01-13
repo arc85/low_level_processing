@@ -1,1 +1,5 @@
+#Mac files
 .DS_Store
+
+#R files
+.Rapp*
