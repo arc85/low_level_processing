@@ -22,4 +22,4 @@ January 13, 2021 changes:
 Future changes will include:
 
   1. Run CITEseq count automatically on samples that contain cell hashing and/or CITEseq data
-  2. 
+  2.
