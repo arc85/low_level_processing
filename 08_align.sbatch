@@ -11,7 +11,7 @@ module load cellranger/3.1.0
 
 cd $OVERALL_DIR/${FASTQ_FOLDER}/${FLOWCELL}
 
-TO_ALIGN=($(ls | grep -v "CITEseq\|TCR\|BCR"))
+TO_ALIGN=($(ls | grep -v "CITEseq\|Hash\|TCR\|BCR"))
 
 cd $OVERALL_DIR/${MAT_FOLDER}
 

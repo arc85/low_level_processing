@@ -18,5 +18,4 @@ Future directions include:
 
   1. Include different alignment scripts for human and murine data.
   2. Changing "08_align.sbatch" to run "09_copy_summaries.sh" whenever the array completes.
-  3. Included alignment arrays for TCR and BCR samples in addition to gene expression alignment.
-  4. Run CITEseq count automatically on samples that contain cell hashing and/or CITEseq data
+  3. Run CITEseq count automatically on samples that contain cell hashing and/or CITEseq data
