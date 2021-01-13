@@ -11,7 +11,7 @@ module load cellranger/3.1.0
 
 cd $OVERALL_DIR/${FASTQ_FOLDER}/${FLOWCELL}
 
-TO_ALIGN=($(ls | grep -v "hash\|TCR\|BCR"))
+TO_ALIGN=($(ls | grep -v "Hash\|TCR\|BCR"))
 
 cd $OVERALL_DIR/${MAT_FOLDER}
 
