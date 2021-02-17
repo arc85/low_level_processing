@@ -1,0 +1,16 @@
+#!/bin/bash
+
+module load  gcc/8.2.0
+module load r/3.6.0
+
+cd $OVERALL_DIR/${FASTQ_FOLDER}/${FLOWCELL}
+
+TO_ALIGN_CITESEQ=($(ls | grep "Hash\|hash\|CITEseq"))
+ALIGN_LENGTH_CITESEQ=${#TO_ALIGN[@]}
+ALIGN_LENGTH_CITESEQ=$(expr $ALIGN_LENGTH - 1)
+ARRAY_CITESEQ="0-$ALIGN_LENGTH"
+
+export TO_ALIGN_CITESEQ
+export ARRAY_CITESEQ
+
+mkdir $CITESEQ_FOLDER

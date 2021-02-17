@@ -1,12 +1,13 @@
 #!/bin/bash
 #SBATCH -p htc
 #SBATCH -N 1
-#SBATCH -J citeseq
+#SBATCH -J stage_3
 #SBATCH -t 12:00:00
-#SBATCH --array=0-4
 
 #SBATCH --cpus-per-task=4
-#SBATCH --mem=32g
+#SBATCH --mem=40g
+#SBATCH mail-user=arc85@pitt.edu
+#SBATCH mail-type=ALL
 
 #This script creates a SLURM batch file to run citseqcount on numerous files
 
@@ -18,7 +19,7 @@ cut -d "," -f2 novaseq4_simple_sample.csv > sample_names.txt
 
 NAMES=($(while IFS= read -r line
   do
-    echo "$line" | grep -v "Sample" | grep "Hash" 
+    echo "$line" | grep -v "Sample" | grep "Hash"
   done < sample_names.txt
   ))
 
