@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH -p htc
 #SBATCH -N 1
-#SBATCH -J count
+#SBATCH -J stage_2
 #SBATCH -t 2-00:00:00
 
 #SBATCH --cpus-per-task=8
