@@ -9,15 +9,18 @@
 #SBATCH mail-user=arc85@pitt.edu
 #SBATCH mail-type=ALL
 
-mkdir $MAT_FOLDER
-
 module load bcl2fastq2/2.20.0
 BCL2FASTQ=/ihome/crc/install/cellranger/bcl2fastq2-v2.20.0/bin/bcl2fastq
+
+module load gcc/8.2.0
+module load r/3.6.0
+
+mkdir $MAT_FOLDER
 
 source ./bin/01_setup.sh
 source ./bin/02_run_download.sh
 source ./bin/03_untar_downloaded_run.sh
-source ./bin/04_generate_sample_sheet.sh
+R --vanilla -f ./lib/R/sample_sheet_creater.R --args FLOWCELL=$FLOWCELL OVERALL_FOLDER=$OVERALL_FOLDER
 
 SAMPLESHEET=($(ls | grep "sample_sheet.csv"))
 
