@@ -9,6 +9,8 @@
 #SBATCH mail-user=arc85@pitt.edu
 #SBATCH mail-type=ALL
 
+mkdir $MAT_FOLDER
+
 module load bcl2fastq2/2.20.0
 BCL2FASTQ=/ihome/crc/install/cellranger/bcl2fastq2-v2.20.0/bin/bcl2fastq
 
