@@ -6,6 +6,6 @@ export RUN_FOLDER='Run_name'
 export FLOWCELL='Flowcell'
 export FASTQ_FOLDER='Fastq_folder'
 export MAT_FOLDER='matrix_folder'
-chmod +rws 05_mkfastq.sh
+export USER_FOR_EMAIL='arc85@pitt.edu'
 
 mkdir $MAT_FOLDER
