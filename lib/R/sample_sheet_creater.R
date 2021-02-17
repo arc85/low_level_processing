@@ -7,21 +7,20 @@ args <- strsplit(cli,"=",fixed=T)
 flow.cell <- args[[1]][2]
 overall.folder <- args[[2]][2]
 
-.libPaths("/ihome/tbruno/arc85/Rlibs_Oct_2019")
 library(tidyverse)
 
 #Read in indices
 
-si.ga.indices <- read.csv("./ancillary_files/chromium-shared-sample-indexes-plate.csv",header=F)
+si.ga.indices <- read.csv("./input_files/chromium-shared-sample-indexes-plate.csv",header=F)
 colnames(si.ga.indices) <- c("index","set1","set2","set3","set4")
 
-si.na.indices <- read.csv("./ancillary_files/Chromium-i7-Multiplex-Kit-N-Set-A-sample-indexes-plate.csv",header=F)
+si.na.indices <- read.csv("./input_files/Chromium-i7-Multiplex-Kit-N-Set-A-sample-indexes-plate.csv",header=F)
 colnames(si.na.indices) <- c("index","set1","set2","set3","set4")
 
 
 #Read in simple sample sheet
 
-simple.sample.sheet <- paste("./ancillary_files/",overall.folder,"_simple_sample.csv",sep="")
+simple.sample.sheet <- paste("./input_files/",overall.folder,"_simple_sample.csv",sep="")
 simple.sample <- read.csv(simple.sample.sheet)
 redo.lanes <- strsplit(as.character(simple.sample$Lane),split="-")
 lanes <- rep(redo.lanes[[1]][1]:redo.lanes[[1]][2],each=4)

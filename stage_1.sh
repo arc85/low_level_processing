@@ -15,11 +15,20 @@ BCL2FASTQ=/ihome/crc/install/cellranger/bcl2fastq2-v2.20.0/bin/bcl2fastq
 module load gcc/8.2.0
 module load r/3.6.0
 
-mkdir $MAT_FOLDER
-
 source ./bin/01_setup.sh
 source ./bin/02_run_download.sh
+
+if [[ $? -ne 0 ]] ; then
+	echo ""
+	echo "MD5sum doesn't match expected"
+	exit 1
+else
+	echo "MD5sum matches, proceeding"
+	echo ""
+fi
+
 source ./bin/03_untar_downloaded_run.sh
+
 R --vanilla -f ./lib/R/sample_sheet_creater.R --args FLOWCELL=$FLOWCELL OVERALL_FOLDER=$OVERALL_FOLDER
 
 SAMPLESHEET=($(ls | grep "sample_sheet.csv"))
