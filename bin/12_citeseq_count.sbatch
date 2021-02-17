@@ -13,29 +13,23 @@
 
 module load cite-seq-count/1.4.3
 
-cd /zfs1/tbruno/arc85/0_INBOX/novaseq_run4/ancillary_files
-
-cut -d "," -f2 novaseq4_simple_sample.csv > sample_names.txt
-
-NAMES=($(while IFS= read -r line
-  do
-    echo "$line" | grep -v "Sample" | grep "Hash"
-  done < sample_names.txt
-  ))
-
-cd /zfs1/tbruno/arc85/0_INBOX/miseq_run.20.02.20/miseq_run3_unhashing/
-WHITELIST=${FILES[${SLURM_ARRAY_TASK_ID}]}.csv
+cd ${OVERALL_DIR}/${CITESEQ_FOLDER}/whitelists
+WHITELIST=${TO_ALIGN_CITESEQ}[${SLURM_ARRAY_TASK_ID}]}.csv
 LENGTH=$(cat $WHITELIST | wc -l)
 
-cd /zfs1/tbruno/arc85/0_INBOX/miseq_run.20.02.20/miseq_run3_fastq/outs/fastq_path/CR4BK/${FILES[${SLURM_ARRAY_TASK_ID}]}
+cd ${OVERALL_DIR}/${FASTQ_FOLDER}/${FLOWCELL}/${TO_ALIGN_CITESEQ}[${SLURM_ARRAY_TASK_ID}]}
 
-READ1=($(ls | grep -Z "_R1_"))
-READ2=($(ls | grep -Z "_R2_"))
+cat $(ls | grep -Z "_R1_") > r1_merged_fastq.gz
+cat $(ls | grep -Z "_R2_") > r2_merged_fastq.gz
+
+READ1=r1_merged_fastq.gz
+READ2=r2_merged_fastq.gz
 
 CITE-seq-Count -R1 $READ1 -R2 $READ2 \
-	-t /zfs1/tbruno/arc85/0_INBOX/miseq_run.20.02.20/miseq_run3_unhashing/citeseq_tags.csv \
-	-cbf 1 -cbl 16 -umif 17 -umil 28 \
+	-t ${OVERALL_DIR}/ancillary_files/citeseq_large_panel_tags.csv \
+  -cbf 1 -cbl 16 -umif 17 -umil 26 \
+	-trim 10 \
 	-cells $LENGTH \
-	-wl /zfs1/tbruno/arc85/0_INBOX/miseq_run.20.02.20/miseq_run3_unhashing/$WHITELIST \
-	-o /zfs1/tbruno/arc85/0_INBOX/miseq_run.20.02.20/miseq_run3_unhashing/${FILES[${SLURM_ARRAY_TASK_ID}]} \
+	-wl ${OVERALL_DIR}/${CITESEQ_FOLDER}/whitelists/$WHITELIST \
+	-o ${OVERALL_DIR}/${CITESEQ_FOLDER}/${TO_ALIGN_CITESEQ}[${SLURM_ARRAY_TASK_ID}]} \
 	-T 4

@@ -11,12 +11,7 @@
 
 module load cellranger/3.1.0
 
-cd $OVERALL_DIR/${FASTQ_FOLDER}/${FLOWCELL}
-
-TO_ALIGN_TCR_BCR=($(ls | grep "TCR\|BCR"))
-
-cd $OVERALL_DIR
-cd "$MAT_FOLDER"_tcr_bcr_mat
+cd ${OVERALL_DIR}/${TCR_BCR_FOLDER}
 
 FILENAME=${TO_ALIGN_TCR_BCR[${SLURM_ARRAY_TASK_ID}]}
 
