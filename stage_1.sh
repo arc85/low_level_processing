@@ -53,4 +53,4 @@ $BCL2FASTQ --use-bases-mask=Y28,I8,Y91 \
 	--sample-sheet $OVERALL_DIR/${SAMPLESHEET} \
 	--barcode-mismatches=0
 
-source ./bin/06_folder_conversion.sh
+source ./bin/04_folder_conversion.sh
