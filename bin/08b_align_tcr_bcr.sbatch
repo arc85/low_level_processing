@@ -6,7 +6,7 @@
 
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=60g
-#SBATCH mail-user=arc85@pitt.edu
+#SBATCH mail-user=$USER_FOR_EMAIL
 #SBATCH mail-type=ALL
 
 module load cellranger/3.1.0
