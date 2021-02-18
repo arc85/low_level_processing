@@ -1,5 +1,8 @@
 #!/bin/bash
 
+module load  gcc/8.2.0
+module load r/3.6.0
+
 R --vanilla -f ./lib/R/define_gex_samples.R
 
 TO_ALIGN=$(cat ./input_files/gex_samples_for_array.csv)
