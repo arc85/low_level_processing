@@ -17,6 +17,6 @@ while IFS=, read orig target; do
     mv "$orig" "$target"
 done < reorder.txt
 
-rm -r reorder.txt
+rm reorder.txt
 
 cd $OVERALL_DIR
