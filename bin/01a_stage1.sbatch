@@ -6,8 +6,7 @@
 
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=40g
-#SBATCH mail-user=$USER_FOR_EMAIL
-#SBATCH mail-type=ALL
+#SBATCH --mail-type=ALL
 
 module load bcl2fastq2/2.20.0
 BCL2FASTQ=/ihome/crc/install/cellranger/bcl2fastq2-v2.20.0/bin/bcl2fastq
@@ -15,16 +14,18 @@ BCL2FASTQ=/ihome/crc/install/cellranger/bcl2fastq2-v2.20.0/bin/bcl2fastq
 module load gcc/8.2.0
 module load r/3.6.0
 
+source ./bin/01_setup.sh
 source ./bin/02_run_download.sh
 
-if [[ $? -ne 0 ]] ; then
-	echo ""
-	echo "MD5sum doesn't match expected"
-	exit 1
-else
-	echo "MD5sum matches, proceeding"
-	echo ""
-fi
+if [[ $? -ne 0 ]]
+	then
+		echo ""
+		echo "MD5sum doesn't match expected"
+		exit 1
+	else
+		echo "MD5sum matches, proceeding"
+		echo ""
+	fi
 
 source ./bin/03_untar_downloaded_run.sh
 
