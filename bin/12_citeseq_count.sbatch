@@ -6,12 +6,16 @@
 
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=40g
-#SBATCH mail-user=arc85@pitt.edu
+#SBATCH mail-user=$USER_FOR_EMAIL
 #SBATCH mail-type=ALL
 
 #This script creates a SLURM batch file to run citseqcount on numerous files
 
 module load cite-seq-count/1.4.3
+
+REFERENCE_PATH=$(sed 1d ./input_files/sample_info_sheet.csv |
+  awk NR==${SLURM_ARRAY_TASK_ID}  |
+  cut -d',' -f8)
 
 cd ${OVERALL_DIR}/${CITESEQ_FOLDER}/whitelists
 WHITELIST=${TO_ALIGN_CITESEQ}[${SLURM_ARRAY_TASK_ID}]}.csv
@@ -26,7 +30,7 @@ READ1=r1_merged_fastq.gz
 READ2=r2_merged_fastq.gz
 
 CITE-seq-Count -R1 $READ1 -R2 $READ2 \
-	-t ${OVERALL_DIR}/ancillary_files/citeseq_large_panel_tags.csv \
+	-t $REFERENCE_PATH \
   -cbf 1 -cbl 16 -umif 17 -umil 26 \
 	-trim 10 \
 	-cells $LENGTH \
