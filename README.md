@@ -1,24 +1,23 @@
 # Low-level processing of scRNAseq data from 10X and Illumina
+# Updated February 18, 2021
 
-Updated January 13, 2021
+This goal of this pipeline is to facilitate reproducible processing of 10X Genomics data through a standardized workflow.
 
-This pipeline is a work in progress, with the goal being to facilitate ease of processing for 10X Genomics data through a standardized workflow.
+The processing is broken down into 4 distinct stages:
 
-Currently, the pipeline will run from the wrapper through the alignment of gene expression and VDJ FASTQ files. Critical input files are specificed in the ancillary files. Specifically:
+    1. Download raw sequencing data, check MD5sums, untar, run bcl2fastq
+    2. Create SLURM array for GEX alignment
+    3. Create SLURM array for CITEseq alignment
+    4. Create SLURM array for TCR/BCR alignment
 
-  "02_run_download.sh" depends on the specific file structure in "./ancillary_files/Download_Links.csv". This assumes that the run will be downloaded from e.g. DNA Nexus.
+February 18, 2021 changes:
 
-  "07_define_align_array.sh" depends on sample names specified in "./ancillary_files/xxx_simple_sample.csv". Files with specific strings (identified by grep) are excluded from the gene expression alignment array. Specifically, lines with the following strings are excluded:
-
-    1. "Hash" or "hash" or "CITEseq" indicates cell hashing and/or CITEseq libraries
-    2. "TCR" indiciates TCR sequencing libraries
-    3. "BCR" indiciates BCR sequencing libraries
-
-January 13, 2021 changes:
-
-  1. Changing "05_mkfastq.sbatch" to use srun instead of sbatch so that the pipeline runs uninterrupted.
-  2. Adding "08_align_tcr_bcr.sbatch" to align VDJ FASTQ
+  1. Rebasing of the code into distinct stages, separating binaries into bin and R scripts into lib/R
+  2. Creating the following input files:
+    a. variable_names.csv - create environment variables from specified names
+    b. sample_info_sheet.csv - specify the types of libraries (i.e. GEX, CITEseq, TCR/BCR) and the references that should be used for each
+    c. Update citeseq tags - 10 human and 10 murine in one list, separate list of a large CITEseq panel of surface antibodies
 
 Future changes will include:
 
-  1. Run CITEseq count automatically on samples that contain cell hashing and/or CITEseq data
+  1. Creating a report after all stages have been run that aggregates web summaries from CellRanger and run info from CITEseqCount
