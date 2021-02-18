@@ -8,6 +8,7 @@ cut -d "," -f3 $DOWNLINKS > expected_md5.txt
 cut -d "," -f2 $DOWNLINKS > download_links.txt
 dos2unix download_links.txt
 mv download_links.txt $OVERALL_DIR
+mv expected_md5.txt $OVERALL_DIR
 
 cd $OVERALL_DIR
 
@@ -34,6 +35,8 @@ for (( i=0; i<${LENGTH}; i++ ));
       md5sum ${FILE[i]} | cut -d" " -f1 expected_md5_sum.tx >> downloaded_md5.txt
     fi
   done
+
+mv downloaded_md5.txt $OVERALL_DIR
 
 cd $OVERALL_DIR
 
