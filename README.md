@@ -12,7 +12,7 @@ The processing is broken down into 4 distinct stages:
 
 February 18, 2021 changes:
 
-  1. Rebasing of the code into distinct stages, separating binaries into bin and R scripts into lib/R
+  1. Refactoring of the code into distinct stages, separating binaries into bin and R scripts into lib/R
   2. Creating the following input files:
     a. variable_names.csv - create environment variables from specified names
     b. sample_info_sheet.csv - specify the types of libraries (i.e. GEX, CITEseq, TCR/BCR) and the references that should be used for each
