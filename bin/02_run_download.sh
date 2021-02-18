@@ -29,9 +29,9 @@ for (( i=0; i<${LENGTH}; i++ ));
     "
     wget ${FILE[i]}
     if [[$i == 0]]; then
-      md5 ${FILE[i]} | cut -d" " -f4 expected_md5_sum.tx > downloaded_md5.txt
+      md5sum ${FILE[i]} | cut -d" " -f1 expected_md5_sum.tx > downloaded_md5.txt
     else
-      md5 ${FILE[i]} | cut -d" " -f4 expected_md5_sum.tx >> downloaded_md5.txt
+      md5sum ${FILE[i]} | cut -d" " -f1 expected_md5_sum.tx >> downloaded_md5.txt
     fi
   done
 
