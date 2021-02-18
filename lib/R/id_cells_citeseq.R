@@ -1,56 +1,64 @@
 ##TC Generation of CB Whitelists for each sample
-##March 31 2020
+##Feb 18 2021
+
+#Read in external arguements
+cli <- commandArgs(trailingOnly=T)
+args <- strsplit(cli,"=",fixed=T)
+overall.folder <- args[[1]][2]
+fastq.folder <- args[[2]][2]
+flowcell <- args[[3]][2]
+mat.folder <- args[[4]][2]
+citeseq.folder <- args[[5]][2]
 
 .libPaths("/ihome/tbruno/arc85/Rlibs_Oct_2019")
 library(Seurat)
 
-null.path <- getwd()
-files.to.process <- list.files()
-files.to.process <- files.to.process[grep(".out|.sbatch",files.to.process,invert=T)]
+sample.info.sheet <- read.csv("./input_files/sample_info_sheet.csv")
+citeseq.samples <- as.character(sample.info.sheet[sample.info.sheet$CITESEQ=="YES","Sample"])
 
-paths <- paste(null.path,files.to.process,"outs","filtered_feature_bc_matrix",sep="/")
+gex.samples <- gsub("_CITEseq","",citeseq.samples)
 
-dat <- Read10X(paths)
+files.to.process <- paste(overall.folder,mat.folder,gex.samples,"outs","filtered_feature_bc_matrix",sep="/"))
+
+dat <- vector("list",length=length(files.to.process))
+
+for (i in 1:length(files.to.process)) {
+	dat[[i]] <- Read10X(files.to.process)
+}
 
 meta.list <- vector("list",length=length(files.to.process))
+
 for (i in 1:length(files.to.process)) {
-	if (i==1) {
-		meta.list[[i]] <- rep(files.to.process[i],length(grep("^[A-z]",colnames(dat))))
-	} else {
-		meta.list[[i]] <- rep(files.to.process[i],length(grep(paste("^",i,sep=""),colnames(dat))))
-	}
+
+		meta.list[[i]] <- data.frame(sample_id=rep(gex.samples[i],ncol(dat[[i]])))
+		rownames(meta.list[[i]]) <- colnames(dat[[i]])
+
 }
-meta <- data.frame(sample=Reduce(c,meta.list))
-rownames(meta) <- colnames(dat)
 
-ser <- CreateSeuratObject(dat,meta.data=meta)
-ser.split <- SplitObject(ser,split.by="sample")
+ser.list <- vector("list",length=length(files.to.process))
 
-ser.names <- lapply(ser.split,function(x) {
+for (i in 1:length(files.to.process)) {
 
-	if (length(grep("^[A-z]",colnames(x)))>0) {
+	ser.list[[i]] <- CreateSeuratObject(dat[[i]],meta.data=meta.list[[i]])
+
+}
+
+names(ser.list) <- gex.samples
+
+ser.names <- lapply(ser.list,function(x) {
+
 		colnames(x)
-	} else {
-		sapply(strsplit(as.character(colnames(x)),split="_"),function(x) x[2])
-	}
 
 })
 
-names(ser.names) <- names(ser.split)
+names(ser.names) <- citeseq.samples
 
-setwd("/zfs1/tbruno/arc85/0_INBOX/novaseq3_fastq/novaseq_run3/outs/fastq_path/HM2JGDMXX")
-
-cell.hash.samples <- list.files()
-cell.hash.samples <- cell.hash.samples[grep("Hash",cell.hash.samples)]
-temp <- lapply(strsplit(cell.hash.samples,split="_"),function(x) grep("Cell|Hash",x,invert=T,value=T))
-cell.hash.samples <- sapply(temp,function(x) paste(x,collapse="_"))
-
-ser.names <- ser.names[names(ser.names) %in% cell.hash.samples]
-
-setwd("/zfs1/tbruno/arc85/0_INBOX/novaseq3_citeseq/whitelists")
+dir.create(paste(overall.folder,citeseq.folder,"whitelists",sep="/"))
 
 for (i in 1:length(ser.names)) {
 
-	write.table(ser.names[[i]],paste(names(ser.names)[i],"_Cell_Hash",".csv",sep=""),quote=F,row.names=F,col.names=F,sep=",")
+	write.table(ser.names[[i]],file=paste(overall.folder,citeseq.folder,"whitelists",
+	names(ser.names)[i],".csv",sep=""),
+	quote=F,row.names=F,col.names=F,sep=",")
 
 }
