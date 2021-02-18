@@ -12,3 +12,5 @@ ARRAY="0-$ALIGN_LENGTH"
 
 export TO_ALIGN
 export ARRAY
+
+mkdir $MAT_FOLDER
