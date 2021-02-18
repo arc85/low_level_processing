@@ -1,0 +1,11 @@
+Lane,Sample,Index,GEX,CITESEQ,TCR_BCR,GEX_reference,CITESEQ_tags,TCR_BCR_reference
+1-4,SAMP1_human,SI-GA-A1,YES,NO,NO,'/bgfs/genomics/refs/CellRanger/refdata-cellranger-GRCh38-3.0.0',NO,NO
+1-4,SAMP2_human,SI-GA-A2,YES,NO,NO,'/bgfs/genomics/refs/CellRanger/refdata-cellranger-GRCh38-3.0.0',NO,NO
+1-4,SAMP3_mouse,SI-GA-A3,YES,NO,NO,'/bgfs/genomics/refs/CellRanger/refdata-cellranger-mm10-3.0.0',NO,NO
+1-4,SAMP1_human_CITEseq,SI-NA-A1,NO,YES,NO,NO,'./input_files/citeseq_totalseqC_10tags_human_murine.csv',NO
+1-4,SAMP2_human_CITEseq,SI-NA-A2,NO,YES,NO,NO,'./input_files/citeseq_totalseqC_10tags_human_murine.csv',NO
+1-4,SAMP3_mouse_CITEseq,SI-NA-A3,NO,YES,NO,NO,'./input_files/citeseq_totalseqC_10tags_human_murine.csv',NO
+1-4,SAMP1_human_TCR,SI-GA-A4,NO,NO,YES,NO,NO,'/bgfs/genomics/refs/CellRanger/refdata-cellranger-vdj-GRCh38-alts-ensembl-3.1.0'
+1-4,SAMP1_human_BCR,SI-GA-A5,NO,NO,YES,NO,NO,'/bgfs/genomics/refs/CellRanger/refdata-cellranger-vdj-GRCh38-alts-ensembl-3.1.0'
+1-4,SAMP3_mouse_TCR,SI-GA-A4,NO,NO,YES,NO,NO,'/bgfs/genomics/refs/CellRanger/refdata-cellranger-vdj-GRCm38-alts-ensembl-3.1.0'
+1-4,SAMP3_mouse_BCR,SI-GA-A5,NO,NO,YES,YES,NO,'/bgfs/genomics/refs/CellRanger/refdata-cellranger-vdj-GRCm38-alts-ensembl-3.1.0'
