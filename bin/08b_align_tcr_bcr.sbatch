@@ -15,13 +15,17 @@ cd ${OVERALL_DIR}/${TCR_BCR_FOLDER}
 
 FILENAME=${TO_ALIGN_TCR_BCR[${SLURM_ARRAY_TASK_ID}]}
 
+REFERENCE_PATH=$(sed 1d ./input_files/sample_info_sheet.csv |
+  awk NR==${SLURM_ARRAY_TASK_ID}  |
+  cut -d',' -f9)
+
 echo ${SLURM_ARRAY_TASK_ID}
 echo $FILENAME
 
 cellranger vdj \
   --id=$FILENAME \
   --fastqs=$OVERALL_DIR/${FASTQ_FOLDER}/${FLOWCELL} \
-  --reference=/bgfs/genomics/refs/CellRanger/refdata-cellranger-vdj-GRCh38-alts-ensembl-3.1.0 \
+  --reference=$REFERENCE_PATH \
   --sample=$FILENAME \
   --localcores=$SLURM_CPUS_PER_TASK \
   --localmem=59
