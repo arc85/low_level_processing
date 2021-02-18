@@ -5,6 +5,6 @@ RUN_FOLDER,'Run_name'
 FLOWCELL,'Flowcell'
 FASTQ_FOLDER,'Fastq_folder'
 MAT_FOLDER,'matrix_folder'
-CITESEQ_FOLDER,"citeseq_folder"
-TCR_BCR_FOLDER,"tcr_bcr_folder"
+CITESEQ_FOLDER,'citeseq_folder'
+TCR_BCR_FOLDER,'tcr_bcr_folder'
 USER_FOR_EMAIL,'arc85@pitt.edu'
