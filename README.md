@@ -14,9 +14,9 @@ February 18, 2021 changes
 
 1. Refactoring of the code into distinct stages, separating binaries into bin and R scripts into lib/R
 2. Creating the following input files:
-  a. variable_names.csv - create environment variables from specified names
-  b. sample_info_sheet.csv - specify the types of libraries (i.e. GEX, CITEseq, TCR/BCR) and the references that should be used for each
-  c. Update citeseq tags - 10 human and 10 murine in one list, separate list of a large CITEseq panel of surface antibodies
+  1. variable_names.csv - create environment variables from specified names
+  2. sample_info_sheet.csv - specify the types of libraries (i.e. GEX, CITEseq, TCR/BCR) and the references that should be used for each
+  3. Update citeseq tags - 10 human and 10 murine in one list, separate list of a large CITEseq panel of surface antibodies
 
 Future changes will include:
 
