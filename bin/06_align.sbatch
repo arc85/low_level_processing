@@ -6,7 +6,7 @@
 
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=120g
-#SBATCH mail-type=ALL
+#SBATCH --mail-type=ALL
 
 module load cellranger/3.1.0
 
