@@ -20,17 +20,15 @@ colnames(si.na.indices) <- c("index","set1","set2","set3","set4")
 
 #Read in simple sample sheet
 
-simple.sample.sheet <- paste("./input_files/",overall.folder,"_simple_sample.csv",sep="")
-simple.sample <- read.csv(simple.sample.sheet)
+simple.sample <- read.csv("./input_files/sample_info_sheet.csv")
+simple.sample <- simple.sample[,1:3]
 redo.lanes <- strsplit(as.character(simple.sample$Lane),split="-")
 lanes <- rep(redo.lanes[[1]][1]:redo.lanes[[1]][2],each=4)
-
 
 #Split up samples
 
 sample.list <- simple.sample %>% group_split(Sample)
 sets <- vector("list",length=length(sample.list))
-
 
 #Build sample sheet
 
