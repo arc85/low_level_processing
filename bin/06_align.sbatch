@@ -10,9 +10,12 @@
 
 module load cellranger/3.1.0
 
+source ./bin/01_setup.sh
+source ./bin/05_define_align_array.sh
+
 FILENAME=${TO_ALIGN[${SLURM_ARRAY_TASK_ID}]}
 REFERENCE_PATH=$(sed 1d ./input_files/sample_info_sheet.csv |
-  awk NR==${SLURM_ARRAY_TASK_ID}  |
+  awk NR==$(expr ${SLURM_ARRAY_TASK_ID} + 1) |
   cut -d',' -f7)
 
 echo ""
