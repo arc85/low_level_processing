@@ -10,8 +10,6 @@
 
 module load cellranger/3.1.0
 
-cd $OVERALL_DIR/${MAT_FOLDER}
-
 FILENAME=${TO_ALIGN[${SLURM_ARRAY_TASK_ID}]}
 REFERENCE_PATH=$(sed 1d ./input_files/sample_info_sheet.csv |
   awk NR==${SLURM_ARRAY_TASK_ID}  |
@@ -21,6 +19,8 @@ echo ""
 echo ${SLURM_ARRAY_TASK_ID}
 echo $FILENAME
 echo ""
+
+cd $OVERALL_DIR/${MAT_FOLDER}
 
 cellranger count \
   --id=$FILENAME \
