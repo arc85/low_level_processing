@@ -3,20 +3,32 @@
 cd $OVERALL_DIR/input_files
 DOWNLINKS=($(ls | grep -Z "Download_Links"))
 
-cut -d "," -f3 $DOWNLINKS > expected_md5.txt
+cut -d "," -f3 $DOWNLINKS | sed 1d > expected_md5.txt
+dos2unix expected_md5.txt
 
-cut -d "," -f2 $DOWNLINKS > download_links.txt
+cut -d "," -f2 $DOWNLINKS | sed 1d > download_links.txt
 dos2unix download_links.txt
-mv download_links.txt $OVERALL_DIR
+
 mv expected_md5.txt $OVERALL_DIR
 
-cd $OVERALL_DIR
+cut -d "," -f1 $DOWNLINKS | sed 1d > file_names.txt
+dos2unix file_names.txt
+
+FILE_NAME=($(while IFS= read -r line
+  do
+    echo "$line"
+  done < file_names.txt
+  ))
 
 FILE=($(while IFS= read -r line
   do
-    echo "$line" | grep "http"
+    echo "$line"
   done < download_links.txt
   ))
+
+rm file_names.txt download_links.txt
+
+cd $OVERALL_DIR
 
 LENGTH=${#FILE[@]}
 
@@ -29,10 +41,11 @@ for (( i=0; i<${LENGTH}; i++ ));
     ${FILE[i]}
     "
     wget ${FILE[i]}
-    if [[$i == 0]]; then
-      md5sum ${FILE[i]} | cut -d" " -f1 expected_md5_sum.tx > downloaded_md5.txt
-    else
-      md5sum ${FILE[i]} | cut -d" " -f1 expected_md5_sum.tx >> downloaded_md5.txt
+    if [ $i == 0 ]
+      then
+        md5sum ${FILE_NAME[i]} | cut -d" " -f1 > downloaded_md5.txt
+      else
+        md5sum ${FILE_NAME[i]} | cut -d" " -f1 >> downloaded_md5.txt
     fi
   done
 
@@ -44,7 +57,7 @@ DIFF=$(diff downloaded_md5.txt expected_md5.txt)
 
 if [ "$DIFF" != "" ]
   then
-  exit 1
-else
-  exit 0
+    exit 1
+  else
+    exit 0
 fi
