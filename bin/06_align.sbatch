@@ -15,6 +15,7 @@ source ./bin/05_define_align_array.sh
 
 FILENAME=${TO_ALIGN[${SLURM_ARRAY_TASK_ID}]}
 REFERENCE_PATH=$(sed 1d ./input_files/sample_info_sheet.csv |
+  grep -v "CITEseq\|TCR\|BCR" |
   awk NR==$(expr ${SLURM_ARRAY_TASK_ID} + 1) |
   cut -d',' -f7)
 
