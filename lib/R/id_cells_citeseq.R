@@ -18,12 +18,12 @@ citeseq.samples <- as.character(sample.info.sheet[sample.info.sheet$CITESEQ=="YE
 
 gex.samples <- gsub("_CITEseq","",citeseq.samples)
 
-files.to.process <- paste(overall.folder,mat.folder,gex.samples,"outs","filtered_feature_bc_matrix",sep="/"))
+files.to.process <- paste(overall.folder,mat.folder,gex.samples,"outs","filtered_feature_bc_matrix",sep="/")
 
 dat <- vector("list",length=length(files.to.process))
 
 for (i in 1:length(files.to.process)) {
-	dat[[i]] <- Read10X(files.to.process)
+	dat[[i]] <- Read10X(files.to.process[i])
 }
 
 meta.list <- vector("list",length=length(files.to.process))
@@ -57,7 +57,7 @@ dir.create(paste(overall.folder,citeseq.folder,"whitelists",sep="/"))
 
 for (i in 1:length(ser.names)) {
 
-	write.table(ser.names[[i]],file=paste(overall.folder,citeseq.folder,"whitelists",
+	write.table(ser.names[[i]],file=paste("./",citeseq.folder,"/whitelists/",
 	names(ser.names)[i],".csv",sep=""),
 	quote=F,row.names=F,col.names=F,sep=",")
 
