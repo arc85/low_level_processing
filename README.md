@@ -22,4 +22,4 @@ This goal of this pipeline is to facilitate reproducible processing of 10X Genom
 ## Future features to create
 
 1. Automate backup to Pitt Box and/or AWS
-2. Aggregrate web summaries from GEX and TCR/BCR alignment and run_info from CITEseqCount
+2. Aggregate web summaries from GEX and TCR/BCR alignment and run_info from CITEseqCount
