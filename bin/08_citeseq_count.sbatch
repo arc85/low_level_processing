@@ -27,7 +27,7 @@ echo ""
 WHITELIST=${OVERALL_DIR}/${CITESEQ_FOLDER}/whitelists/${TO_ALIGN_CITESEQ[${SLURM_ARRAY_TASK_ID}]}.csv
 LENGTH=$(cat $WHITELIST | wc -l)
 
-cd ${OVERALL_DIR}/${FASTQ_FOLDER}/${FLOWCELL}/${TO_ALIGN_CITESEQ}[${SLURM_ARRAY_TASK_ID}]}
+cd ${OVERALL_DIR}/${FASTQ_FOLDER}/${FLOWCELL}/${TO_ALIGN_CITESEQ[${SLURM_ARRAY_TASK_ID}]}
 
 cat $(ls | grep -Z "_R1_") > r1_merged_fastq.gz
 cat $(ls | grep -Z "_R2_") > r2_merged_fastq.gz
