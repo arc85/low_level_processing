@@ -1,5 +1,5 @@
 # Processing of scRNAseq data from 10X and Illumina
-## Updated February 25, 2021
+## Updated May 4, 2021
 
 This goal of this pipeline is to facilitate reproducible processing of 10X Genomics data through a standardized workflow.
 
@@ -13,7 +13,7 @@ This goal of this pipeline is to facilitate reproducible processing of 10X Genom
 ## May 4, 2021 changes
 
 1. Refactoring of lib/R/sample_info_sheet.R to accomodate new indices from 10X
-2. Add meaningful errors to check formatting of initial input files 
+2. Add meaningful errors to check formatting of initial input files
 
 ## Future features to create
 
