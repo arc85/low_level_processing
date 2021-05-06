@@ -33,37 +33,65 @@ if [ "$DIFF" != "" ]
 
 source ./bin/03_untar_downloaded_run.sh
 
-INDEX_CHECK=($(cut -d',' -f3 ./input_files/sample_info_sheet.csv | sed 1d | grep "GA\|NA"))
+INDEX_CHECK=($(cut -d',' -f3 ./input_files/sample_info_sheet.csv | sed 1d | grep "\\-GA\\-\|\\-NA\\-"))
 INDEX_CHOICE=${#INDEX_CHECK[@]}
 
-#####
-## From here, use if else to set up sample sheet creation ##
-#####
+if [ $INDEX_CHOICE  != 0 ]
 
-R --vanilla -f ./lib/R/sample_sheet_creater.R --args FLOWCELL=$FLOWCELL OVERALL_FOLDER=$OVERALL_FOLDER
+ 	then
 
-SAMPLESHEET=($(ls | grep "sample_sheet.csv"))
+		R --vanilla -f ./lib/R/sample_sheet_creater.R --args FLOWCELL=$FLOWCELL OVERALL_FOLDER=$OVERALL_FOLDER
 
-mkdir $FASTQ_FOLDER
-cd $FASTQ_FOLDER
+		SAMPLESHEET=($(ls | grep "sample_sheet.csv"))
 
-$BCL2FASTQ --use-bases-mask=Y28,I8,Y91 \
-	--create-fastq-for-index-reads \
-	--minimum-trimmed-read-length=8 \
-	--mask-short-adapter-reads=8 \
-	--ignore-missing-positions \
-	--ignore-missing-controls \
-	--ignore-missing-filter \
-	--ignore-missing-bcls \
-	--loading-threads 1 \
-	--processing-threads 4 \
-	--writing-threads 1 \
-	--runfolder-dir $OVERALL_DIR/${RUN_FOLDER} \
-	--output-dir $OVERALL_DIR/${FASTQ_FOLDER} \
-	--interop-dir $OVERALL_DIR/${FASTQ_FOLDER} \
-	--sample-sheet $OVERALL_DIR/${SAMPLESHEET} \
-	--barcode-mismatches=0
+		mkdir $FASTQ_FOLDER
+		cd $FASTQ_FOLDER
 
-cd ..
+		$BCL2FASTQ --use-bases-mask=Y28,I8,Y91 \
+			--create-fastq-for-index-reads \
+			--minimum-trimmed-read-length=8 \
+			--mask-short-adapter-reads=8 \
+			--ignore-missing-positions \
+			--ignore-missing-controls \
+			--ignore-missing-filter \
+			--ignore-missing-bcls \
+			--loading-threads 1 \
+			--processing-threads 4 \
+			--writing-threads 1 \
+			--runfolder-dir $OVERALL_DIR/${RUN_FOLDER} \
+			--output-dir $OVERALL_DIR/${FASTQ_FOLDER} \
+			--interop-dir $OVERALL_DIR/${FASTQ_FOLDER} \
+			--sample-sheet $OVERALL_DIR/${SAMPLESHEET}
+
+		cd ..
+
+	else
+
+		R --vanilla -f ./lib/R/sample_sheet_creater.R --args FLOWCELL=$FLOWCELL OVERALL_FOLDER=$OVERALL_FOLDER
+
+		SAMPLESHEET=($(ls | grep "sample_sheet.csv"))
+
+		mkdir $FASTQ_FOLDER
+		cd $FASTQ_FOLDER
+
+		$BCL2FASTQ --use-bases-mask=Y28,I8,Y91 \
+			--create-fastq-for-index-reads \
+			--minimum-trimmed-read-length=8 \
+			--mask-short-adapter-reads=8 \
+			--ignore-missing-positions \
+			--ignore-missing-controls \
+			--ignore-missing-filter \
+			--ignore-missing-bcls \
+			--loading-threads 1 \
+			--processing-threads 4 \
+			--writing-threads 1 \
+			--runfolder-dir $OVERALL_DIR/${RUN_FOLDER} \
+			--output-dir $OVERALL_DIR/${FASTQ_FOLDER} \
+			--interop-dir $OVERALL_DIR/${FASTQ_FOLDER} \
+			--sample-sheet $OVERALL_DIR/${SAMPLESHEET}
+
+		cd ..
+
+	fi
 
 source ./bin/04_folder_conversion.sh
