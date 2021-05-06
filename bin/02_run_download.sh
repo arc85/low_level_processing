@@ -3,16 +3,13 @@
 cd $OVERALL_DIR/input_files
 DOWNLINKS=($(ls | grep -Z "Download_Links"))
 
-cut -d "," -f3 $DOWNLINKS | sed 1d | tr -d '\r' > expected_md5.txt
-dos2unix expected_md5.txt
+cut -d "," -f3 $DOWNLINKS | sed 1d > expected_md5.txt
 
 cut -d "," -f2 $DOWNLINKS | sed 1d > download_links.txt
-dos2unix download_links.txt
 
 mv expected_md5.txt $OVERALL_DIR
 
 cut -d "," -f1 $DOWNLINKS | sed 1d > file_names.txt
-dos2unix file_names.txt
 
 FILE_NAME=($(while IFS= read -r line
   do
