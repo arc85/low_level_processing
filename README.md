@@ -12,10 +12,14 @@ This goal of this pipeline is to facilitate reproducible processing of 10X Genom
 
 ## May 4, 2021 changes
 
-1. Refactoring of lib/R/sample_info_sheet.R to accomodate new indices from 10X
-2. Add meaningful errors to check formatting of initial input files
+1. Check format of input files and use sed or tr instead of dos2unix
+1. Prevent automatic exit after MD5sum check of downloaded files - done
+2. Refactoring of lib/R/sample_info_sheet.R to accomodate new indices from 10X
+3. Modify 02_run_download.sh to not rely on dos2unix (use sed instead)
+4. Add meaningful errors to check formatting of initial input files
 
 ## Future features to create
 
-1. Automate backup to Pitt Box and/or AWS
-2. Aggregate web summaries from GEX and TCR/BCR alignment and run_info from CITEseqCount
+1. Build capacity for multiome (i.e. paired scRNAseq and paired scATACseq) analysis - cellranger ARC required
+2. Automate backup to Pitt Box and/or AWS
+3. Aggregate web summaries from GEX and TCR/BCR alignment and run_info from CITEseqCount
