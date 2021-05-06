@@ -17,17 +17,28 @@ module load r/3.6.0
 source ./bin/01_setup.sh
 source ./bin/02_run_download.sh
 
-if [[ $? -ne 0 ]]
-	then
-		echo ""
-		echo "MD5sum doesn't match expected"
-		exit 1
-	else
-		echo "MD5sum matches, proceeding"
-		echo ""
-	fi
+DIFF=$(diff downloaded_md5.txt expected_md5.txt)
+
+if [ "$DIFF" != "" ]
+  then
+    echo ""
+    echo "MD5sum doesn't match expected"
+    echo ""
+    exit 1
+  else
+    echo ""
+    echo "MD5sum matches, proceeding"
+    echo ""
+  fi
 
 source ./bin/03_untar_downloaded_run.sh
+
+INDEX_CHECK=($(cut -d',' -f3 ./input_files/sample_info_sheet.csv | sed 1d | grep "GA\|NA"))
+INDEX_CHOICE=${#INDEX_CHECK[@]}
+
+#####
+## From here, use if else to set up sample sheet creation ##
+#####
 
 R --vanilla -f ./lib/R/sample_sheet_creater.R --args FLOWCELL=$FLOWCELL OVERALL_FOLDER=$OVERALL_FOLDER
 
