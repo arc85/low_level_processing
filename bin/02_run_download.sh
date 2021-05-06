@@ -50,14 +50,3 @@ for (( i=0; i<${LENGTH}; i++ ));
   done
 
 mv downloaded_md5.txt $OVERALL_DIR
-
-cd $OVERALL_DIR
-
-DIFF=$(diff downloaded_md5.txt expected_md5.txt)
-
-if [ "$DIFF" != "" ]
-  then
-    exit 1
-  else
-    exit 0
-fi
