@@ -67,7 +67,7 @@ if [ $INDEX_CHOICE  != 0 ]
 
 	else
 
-		R --vanilla -f ./lib/R/sample_sheet_creator.R --args FLOWCELL=$FLOWCELL OVERALL_FOLDER=$OVERALL_FOLDER
+		R --vanilla -f ./lib/R/sample_sheet_creator_dual_index.R --args FLOWCELL=$FLOWCELL OVERALL_FOLDER=$OVERALL_FOLDER
 
 		SAMPLESHEET=($(ls | grep "sample_sheet.csv"))
 
