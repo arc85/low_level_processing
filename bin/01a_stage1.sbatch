@@ -67,14 +67,14 @@ if [ $INDEX_CHOICE  != 0 ]
 
 	else
 
-		R --vanilla -f ./lib/R/sample_sheet_creator.R --args FLOWCELL=$FLOWCELL OVERALL_FOLDER=$OVERALL_FOLDER
+		R --vanilla -f ./lib/R/sample_sheet_creator_dual_index.R --args FLOWCELL=$FLOWCELL OVERALL_FOLDER=$OVERALL_FOLDER
 
 		SAMPLESHEET=($(ls | grep "sample_sheet.csv"))
 
 		mkdir $FASTQ_FOLDER
 		cd $FASTQ_FOLDER
 
-		$BCL2FASTQ --use-bases-mask=Y28,I8,Y91 \
+		$BCL2FASTQ --use-bases-mask=Y26,I10,I10,Y90 \
 			--create-fastq-for-index-reads \
 			--minimum-trimmed-read-length=8 \
 			--mask-short-adapter-reads=8 \
