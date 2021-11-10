@@ -47,3 +47,5 @@ for (( i=0; i<${LENGTH}; i++ ));
   done
 
 mv downloaded_md5.txt $OVERALL_DIR
+
+cd $OVERALL_DIR
