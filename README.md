@@ -1,7 +1,7 @@
 # Processing of scRNAseq data from 10X
 ## Updated November 10, 2021
 
-This goal of this pipeline is to facilitate reproducible processing of 10X Genomics data through a standardized workflow. Why isn't this working.
+This goal of this pipeline is to facilitate reproducible processing of 10X Genomics data through a standardized workflow.
 
 ## Distinct stages of processing
 
