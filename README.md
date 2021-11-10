@@ -1,5 +1,5 @@
-# Processing of scRNAseq data from 10X and Illumina
-## Updated May 4, 2021
+# Processing of scRNAseq data from 10X
+## Updated November 10, 2021
 
 This goal of this pipeline is to facilitate reproducible processing of 10X Genomics data through a standardized workflow.
 
@@ -8,17 +8,14 @@ This goal of this pipeline is to facilitate reproducible processing of 10X Genom
 1. Download raw sequencing data, check MD5sums, untar, run bcl2fastq
 2. SLURM array for GEX alignment
 3. SLURM array for CITEseqCount (dependent on completion of stage 2)
-4. SLURM array for TCR/BCR alignment
+4. SLURM array for TCR/BCR alignment (independent of stages 2 and 3)
 
-## May 4, 2021 changes
+## November 10, 2021 changes
 
-1. Check format of input files and use sed or tr instead of dos2unix
-1. Prevent automatic exit after MD5sum check of downloaded files - done
-2. Refactoring of lib/R/sample_info_sheet.R to accomodate new indices from 10X
-3. Modify 02_run_download.sh to not rely on dos2unix (use sed instead)
-4. Add meaningful errors to check formatting of initial input files
+1. Update read structure in bcl2fastq for dual indices
+2. Specify sample_sheet_creator_dual_index.R for dual index sample sheet creation
 
-## Future features to create
+## Future features
 
 1. Build capacity for multiome (i.e. paired scRNAseq and paired scATACseq) analysis - cellranger ARC required
 2. Automate backup to Pitt Box and/or AWS
