@@ -20,7 +20,10 @@ colnames(dual.nt.kit) <- c("index","set1","set2","set3")
 dual.tt.kit <- read.csv("./input_files/Dual_Index_Kit_TT_Set_A.csv")
 colnames(dual.tt.kit) <- c("index","set1","set2","set3")
 
-dual.comb.kit <- do.call(rbind,list(dual.nn.kit,dual.nt.kit,dual.tt.kit))
+dual.tn.kit <- read.csv("./input_files/Dual_Index_Kit_TN_Set_A.csv")
+colnames(dual.tn.kit) <- c("index","set1","set2","set3")
+
+dual.comb.kit <- do.call(rbind,list(dual.nn.kit,dual.nt.kit,dual.tt.kit,dual.tn.kit))
 ## Note: dual combo kits always use set1, but use EITHER set2 OR set3
 ## Depends on the version of the NovaSeq6000 kit used
 ## The indices are reverse compliments
