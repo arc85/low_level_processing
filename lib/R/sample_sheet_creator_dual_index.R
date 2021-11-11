@@ -65,5 +65,5 @@ sample.sheet <- do.call(rbind,sets)
 #Write sample sheet
 file.name <- paste(overall.folder,"_sample_sheet.csv",sep="")
 
-writeLines("[Header],,,,\nEMFileVersion,4,,,\n[Reads],,,,\n28,,,,\n90,,,,\n[Data],,,,\nLane,Sample_ID,Sample_Name,index,Sample_Project",file.name)
+writeLines("[Header],,,,\nEMFileVersion,4,,,\n[Reads],,,,\n28,,,,\n90,,,,\n[Data],,,,\nLane,Sample_ID,Sample_Name,index,index2,Sample_Project",file.name)
 write.table(sample.sheet,file=file.name,append=T,quote=F,sep=",",row.names=F,col.names=F)
