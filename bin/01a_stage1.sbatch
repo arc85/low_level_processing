@@ -74,7 +74,7 @@ if [ $INDEX_CHOICE  != 0 ]
 		mkdir $FASTQ_FOLDER
 		cd $FASTQ_FOLDER
 
-		$BCL2FASTQ --use-bases-mask=Y26,I10,I10,Y90 \
+		$BCL2FASTQ --use-bases-mask=Y28,I10,I10,Y90 \
 			--create-fastq-for-index-reads \
 			--minimum-trimmed-read-length=8 \
 			--mask-short-adapter-reads=8 \
